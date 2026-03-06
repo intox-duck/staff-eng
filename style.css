@@ -69,7 +69,7 @@
   --space-8: 32px;
   --space-10: 40px;
   --space-12: 48px;
-  --top-bar-height: 98px;
+  --top-bar-height: 112px;
 
   /* Chart colors */
   --chart-1: #0EA5E9;
@@ -153,15 +153,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: var(--top-bar-height);
-  padding: var(--space-5) var(--space-4);
+  height: var(--top-bar-height);
+  min-height: 0;
+  padding: 0 var(--space-4);
   border-bottom: 1px solid var(--sidebar-border);
+  box-sizing: border-box;
 }
 
 .logo-strip {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 7px;
   flex-wrap: nowrap;
   white-space: nowrap;
 }
@@ -175,9 +177,9 @@
 }
 
 .logo-mark {
-  height: 23px;
-  min-height: 23px;
-  max-height: 23px;
+  height: 30px;
+  min-height: 30px;
+  max-height: 30px;
   width: auto;
   display: block;
   object-fit: contain;
@@ -185,9 +187,9 @@
 }
 
 .logo-mark--x {
-  height: 16px;
-  min-height: 16px;
-  max-height: 16px;
+  height: 21px;
+  min-height: 21px;
+  max-height: 21px;
 }
 
 .logo-mark--chapter2 {
@@ -291,8 +293,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: var(--top-bar-height);
-  padding: var(--space-4) var(--space-6);
+  height: var(--top-bar-height);
+  min-height: 0;
+  padding: 0 var(--space-6);
   border-bottom: 1px solid var(--panel-border-strong);
   box-shadow: 0 1px 0 rgba(15, 23, 42, 0.04);
   background: var(--color-surface);
@@ -300,6 +303,7 @@
   top: 0;
   z-index: 10;
   flex-shrink: 0;
+  box-sizing: border-box;
 }
 
 .page-title {
@@ -1182,14 +1186,14 @@
     gap: 6px;
   }
   .logo-mark {
-    height: 16px;
-    min-height: 16px;
-    max-height: 16px;
+    height: 21px;
+    min-height: 21px;
+    max-height: 21px;
   }
   .logo-mark--x {
-    height: 11px;
-    min-height: 11px;
-    max-height: 11px;
+    height: 14px;
+    min-height: 14px;
+    max-height: 14px;
   }
   .theme-toggle {
     justify-content: center;
@@ -1292,14 +1296,14 @@
   }
 
   .logo-mark {
-    height: 20px;
-    min-height: 20px;
-    max-height: 20px;
+    height: 26px;
+    min-height: 26px;
+    max-height: 26px;
   }
   .logo-mark--x {
-    height: 14px;
-    min-height: 14px;
-    max-height: 14px;
+    height: 18px;
+    min-height: 18px;
+    max-height: 18px;
   }
 
   .sidebar-logo,
