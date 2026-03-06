@@ -5,6 +5,25 @@ export const config = {
   matcher: ["/", "/index.html", "/login", "/login.html"]
 };
 
+function getAllowedUsernames() {
+  const configured = typeof process.env.APP_ALLOWED_USERNAMES === "string"
+    ? process.env.APP_ALLOWED_USERNAMES
+    : "";
+  const fromList = configured
+    .split(",")
+    .map(function(name) { return name.trim().toLowerCase(); })
+    .filter(Boolean);
+  const primary = typeof process.env.APP_USERNAME === "string"
+    ? process.env.APP_USERNAME.trim().toLowerCase()
+    : "";
+
+  if (primary) {
+    fromList.push(primary);
+  }
+
+  return Array.from(new Set(fromList));
+}
+
 function redirectToLogin(request) {
   return Response.redirect(new URL("/login", request.url), 307);
 }
@@ -32,11 +51,11 @@ async function getSession(request) {
 
 export default async function middleware(request) {
   const url = new URL(request.url);
-  const expectedUsername = process.env.APP_USERNAME;
   const secret = process.env.APP_AUTH_SECRET;
+  const allowedUsernames = getAllowedUsernames();
 
-  if (!expectedUsername || !secret) {
-    return new Response("Missing APP_USERNAME or APP_AUTH_SECRET in the Vercel environment.", {
+  if (!secret || allowedUsernames.length === 0) {
+    return new Response("Missing APP_AUTH_SECRET and/or APP_USERNAME(APP_ALLOWED_USERNAMES) in the Vercel environment.", {
       status: 500,
       headers: {
         "content-type": "text/plain; charset=utf-8",
@@ -46,7 +65,11 @@ export default async function middleware(request) {
   }
 
   const session = await getSession(request);
-  const isAuthenticated = Boolean(session && session.username === expectedUsername);
+  const isAuthenticated = Boolean(
+    session &&
+    typeof session.username === "string" &&
+    allowedUsernames.includes(session.username.toLowerCase())
+  );
 
   if (url.pathname === "/login" || url.pathname === "/login.html") {
     if (isAuthenticated) {

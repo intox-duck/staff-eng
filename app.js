@@ -230,7 +230,7 @@ document.addEventListener("DOMContentLoaded", function() {
     el.innerHTML = DATA.salaryRoles.map(function(r, i) {
       var cls = LEVEL_CLASSES[i];
       var tier = LEVEL_TIERS[i];
-      var colors = ["var(--color-accent-2)", "var(--color-accent)", "var(--chart-3)"];
+      var colors = ["var(--color-positive)", "var(--color-accent)", "var(--chart-3)"];
       var barColor = colors[i];
       function pct(lo, hi) {
         var left = Math.round((lo / maxTC) * 100);
@@ -270,7 +270,7 @@ document.addEventListener("DOMContentLoaded", function() {
     kill("salary");
     var c = C();
     // Per-level colors: cyan for Foundational, blue for Senior, purple for Principal
-    var levelColors = [c.accent2, c.accent, c.purple];
+    var levelColors = [c.green, c.accent, c.purple];
     // Build 3 datasets (one per level), each with 3 data points (P25, P50, P75 ranges)
     var datasets = DATA.salaryRoles.map(function(r, i) {
       return {

@@ -4,6 +4,25 @@ export const config = {
   runtime: "edge"
 };
 
+function getAllowedUsernames() {
+  const configured = typeof process.env.APP_ALLOWED_USERNAMES === "string"
+    ? process.env.APP_ALLOWED_USERNAMES
+    : "";
+  const fromList = configured
+    .split(",")
+    .map(function(name) { return name.trim().toLowerCase(); })
+    .filter(Boolean);
+  const primary = typeof process.env.APP_USERNAME === "string"
+    ? process.env.APP_USERNAME.trim().toLowerCase()
+    : "";
+
+  if (primary) {
+    fromList.push(primary);
+  }
+
+  return Array.from(new Set(fromList));
+}
+
 function jsonResponse(body, init) {
   const headers = new Headers(init && init.headers ? init.headers : {});
 
@@ -26,11 +45,11 @@ export default async function handler(request) {
     });
   }
 
-  const expectedUsername = process.env.APP_USERNAME;
   const expectedPassword = process.env.APP_PASSWORD;
   const secret = process.env.APP_AUTH_SECRET;
+  const allowedUsernames = getAllowedUsernames();
 
-  if (!expectedUsername || !expectedPassword || !secret) {
+  if (!expectedPassword || !secret || allowedUsernames.length === 0) {
     return jsonResponse({ error: "Authentication is not fully configured." }, { status: 500 });
   }
 
@@ -42,14 +61,14 @@ export default async function handler(request) {
     return jsonResponse({ error: "Invalid request body." }, { status: 400 });
   }
 
-  const username = typeof payload.username === "string" ? payload.username.trim() : "";
+  const username = typeof payload.username === "string" ? payload.username.trim().toLowerCase() : "";
   const password = typeof payload.password === "string" ? payload.password : "";
 
-  if (username !== expectedUsername || password !== expectedPassword) {
+  if (!allowedUsernames.includes(username) || password !== expectedPassword) {
     return jsonResponse({ error: "Invalid email or password." }, { status: 401 });
   }
 
-  const token = await createSessionToken(expectedUsername, secret);
+  const token = await createSessionToken(username, secret);
 
   return jsonResponse({ ok: true }, {
     status: 200,

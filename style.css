@@ -69,6 +69,7 @@
   --space-8: 32px;
   --space-10: 40px;
   --space-12: 48px;
+  --top-bar-height: 98px;
 
   /* Chart colors */
   --chart-1: #0EA5E9;
@@ -152,6 +153,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: var(--top-bar-height);
   padding: var(--space-5) var(--space-4);
   border-bottom: 1px solid var(--sidebar-border);
 }
@@ -173,9 +175,9 @@
 }
 
 .logo-mark {
-  height: 18px;
-  min-height: 18px;
-  max-height: 18px;
+  height: 23px;
+  min-height: 23px;
+  max-height: 23px;
   width: auto;
   display: block;
   object-fit: contain;
@@ -183,9 +185,9 @@
 }
 
 .logo-mark--x {
-  height: 13px;
-  min-height: 13px;
-  max-height: 13px;
+  height: 16px;
+  min-height: 16px;
+  max-height: 16px;
 }
 
 .logo-mark--chapter2 {
@@ -289,6 +291,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  min-height: var(--top-bar-height);
   padding: var(--space-4) var(--space-6);
   border-bottom: 1px solid var(--panel-border-strong);
   box-shadow: 0 1px 0 rgba(15, 23, 42, 0.04);
@@ -1018,7 +1021,7 @@
   height: 4px;
 }
 
-.level-card--junior::before { background: var(--color-accent-2); }
+.level-card--junior::before { background: var(--color-positive); }
 .level-card--mid::before { background: var(--color-accent); }
 .level-card--senior::before { background: var(--chart-3); }
 
@@ -1034,8 +1037,8 @@
 }
 
 .level-card--junior .level-card-tier {
-  background: rgba(6, 182, 212, 0.12);
-  color: var(--color-accent-2);
+  background: var(--color-positive-subtle);
+  color: var(--color-positive);
 }
 
 .level-card--mid .level-card-tier {
@@ -1179,14 +1182,14 @@
     gap: 6px;
   }
   .logo-mark {
-    height: 13px;
-    min-height: 13px;
-    max-height: 13px;
+    height: 16px;
+    min-height: 16px;
+    max-height: 16px;
   }
   .logo-mark--x {
-    height: 9px;
-    min-height: 9px;
-    max-height: 9px;
+    height: 11px;
+    min-height: 11px;
+    max-height: 11px;
   }
   .theme-toggle {
     justify-content: center;
@@ -1289,14 +1292,19 @@
   }
 
   .logo-mark {
-    height: 16px;
-    min-height: 16px;
-    max-height: 16px;
+    height: 20px;
+    min-height: 20px;
+    max-height: 20px;
   }
   .logo-mark--x {
-    height: 11px;
-    min-height: 11px;
-    max-height: 11px;
+    height: 14px;
+    min-height: 14px;
+    max-height: 14px;
+  }
+
+  .sidebar-logo,
+  .top-header {
+    min-height: 0;
   }
 
   .toggle-btn {
