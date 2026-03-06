@@ -1,0 +1,14 @@
+{
+  "name": "multi-staffing-dashboard",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@vercel/functions": "^2.2.13"
+  },
+  "devDependencies": {
+    "vercel": "^48.1.6"
+  },
+  "scripts": {
+    "check": "node --check app.js && node --check auth.js && node --check middleware.js && node --check api/login.js && node --check api/logout.js"
+  }
+}

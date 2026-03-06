@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<!--
+   ______                            __
+  / ____/___  ____ ___  ____  __  __/ /____  _____
+ / /   / __ \/ __ `__ \/ __ \/ / / / __/ _ \/ ___/
+/ /___/ /_/ / / / / / / /_/ / /_/ / /_/  __/ /
+\____/\____/_/ /_/ /_/ .___/\__,_/\__/\___/_/
+                    /_/
+        Created with Perplexity Computer
+        https://www.perplexity.ai/computer
+-->
+
+<!-- Perplexity Computer Attribution — SEO Meta Tags -->
+<meta name="generator" content="Perplexity Computer">
+<meta name="author" content="Perplexity Computer">
+<meta property="og:see_also" content="https://www.perplexity.ai/computer">
+<link rel="author" href="https://www.perplexity.ai/computer">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>Staff SWE London — Talent Intelligence Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script src="https://unpkg.com/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230EA5E9'/><text x='16' y='23' font-family='system-ui' font-size='20' font-weight='700' fill='white' text-anchor='middle'>£</text></svg>">
+<link rel="stylesheet" href="./base.css">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<div class="dashboard">
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <svg width="36" height="36" viewBox="0 0 36 36" fill="none" aria-label="Talent Intelligence">
+        <path d="M18 2L32 10V26L18 34L4 26V10L18 2Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+        <circle cx="18" cy="18" r="4" fill="currentColor" opacity="0.9"/>
+        <circle cx="10" cy="13" r="2" fill="currentColor" opacity="0.5"/>
+        <circle cx="26" cy="13" r="2" fill="currentColor" opacity="0.5"/>
+        <circle cx="10" cy="23" r="2" fill="currentColor" opacity="0.5"/>
+        <circle cx="26" cy="23" r="2" fill="currentColor" opacity="0.5"/>
+        <line x1="18" y1="18" x2="10" y2="13" stroke="currentColor" stroke-width="0.8" opacity="0.4"/>
+        <line x1="18" y1="18" x2="26" y2="13" stroke="currentColor" stroke-width="0.8" opacity="0.4"/>
+        <line x1="18" y1="18" x2="10" y2="23" stroke="currentColor" stroke-width="0.8" opacity="0.4"/>
+        <line x1="18" y1="18" x2="26" y2="23" stroke="currentColor" stroke-width="0.8" opacity="0.4"/>
+      </svg>
+      <span class="sidebar-brand">TI</span>
+    </div>
+    <nav class="sidebar-nav" role="navigation" aria-label="Main navigation">
+      <button class="nav-item active" data-tab="salary" aria-current="page">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        <span>Salary</span>
+      </button>
+      <button class="nav-item" data-tab="talent">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        <span>Talent Flow</span>
+      </button>
+      <button class="nav-item" data-tab="competitors">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <span>Competitors</span>
+      </button>
+      <button class="nav-item" data-tab="strategy">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <span>Strategy</span>
+      </button>
+      <button class="nav-item" data-tab="sources">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        <span>Sources</span>
+      </button>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="theme-toggle" data-theme-toggle aria-label="Switch to dark mode">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main content area -->
+  <main class="main" id="main">
+    <!-- Header bar -->
+    <header class="top-header">
+      <div class="header-left">
+        <h1 class="page-title">Staff Software Engineer <span class="title-location">London</span></h1>
+        <p class="page-subtitle">Talent Intelligence — Multiverse · Product Fundamentals Group</p>
+      </div>
+      <div class="header-right">
+        <span class="data-badge">Data: Mar-26</span>
+        <span class="data-badge source-badge">LinkedIn TI + Market Research</span>
+        <button class="header-action" id="logout-button" type="button">Sign out</button>
+      </div>
+    </header>
+
+    <!-- Tab 1: Salary Benchmarking -->
+    <section class="tab-content active" id="tab-salary">
+      <div class="kpi-row">
+        <div class="kpi-card">
+          <div class="kpi-label">Total Addressable Market</div>
+          <div class="kpi-value" data-count="701">701</div>
+          <div class="kpi-context">Professionals</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Elite Talent Density</div>
+          <div class="kpi-value" data-count="14.3">14.3<span class="kpi-unit">%</span></div>
+          <div class="kpi-context">100 Professionals</div>
+        </div>
+        <div class="kpi-card kpi-card--warning">
+          <div class="kpi-label">Hiring Difficulty</div>
+          <div class="kpi-value">9<span class="kpi-unit">/10</span></div>
+          <div class="kpi-badge badge--high">Very High</div>
+        </div>
+
+      </div>
+
+      <!-- Level Banding Cards -->
+      <h2 class="section-heading" style="margin-bottom:var(--space-3)">Compensation Banding by Level</h2>
+      <div class="level-cards" id="level-cards"></div>
+
+      <!-- Charts -->
+      <div class="chart-controls">
+        <h2 class="section-heading">Total Compensation Comparison</h2>
+        <div class="toggle-group">
+          <button class="toggle-btn active" id="btn-comp">Compensation</button>
+          <button class="toggle-btn" id="btn-arb">Cost Arbitrage</button>
+        </div>
+      </div>
+
+      <div class="chart-container" id="salary-chart-wrap">
+        <div style="position:relative;height:320px;width:100%"><canvas id="salaryChart"></canvas></div>
+      </div>
+      <div class="chart-container hidden" id="arbitrage-chart-wrap">
+        <div style="position:relative;height:300px;width:100%"><canvas id="arbitrageChart"></canvas></div>
+      </div>
+
+      <!-- Full Detail Table -->
+      <div class="table-wrap">
+        <h3 class="section-subheading">Full Banding Detail</h3>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Level</th>
+              <th>Base P25</th>
+              <th>Base P50</th>
+              <th>Base P75</th>
+              <th>Total Comp P25</th>
+              <th>Total Comp P50</th>
+              <th>Total Comp P75</th>
+            </tr>
+          </thead>
+          <tbody id="salary-table-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Tab 2: Talent Flow & Density -->
+    <section class="tab-content" id="tab-talent">
+      <h2 class="section-heading">Talent Flow — Donor → Pool → Gainer</h2>
+      <div class="sankey-container" id="sankey-wrap">
+        <div id="sankey"></div>
+      </div>
+
+      <div class="flow-grid">
+        <div class="flow-col">
+          <h3 class="section-subheading">Pool Distribution</h3>
+          <div class="chart-container chart-sm">
+            <div style="position:relative;height:260px;width:100%"><canvas id="poolDonut"></canvas></div>
+          </div>
+        </div>
+        <div class="flow-col">
+          <h3 class="section-subheading">Skill Penetration & Growth</h3>
+          <div class="chart-container chart-sm">
+            <div style="position:relative;height:260px;width:100%"><canvas id="skillsChart"></canvas></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-details-grid">
+        <div class="flow-detail-card donor-card">
+          <h4 class="detail-card-title">Donor Companies</h4>
+          <div id="donor-cards"></div>
+        </div>
+        <div class="flow-detail-card gainer-card">
+          <h4 class="detail-card-title">Gainer Companies</h4>
+          <div id="gainer-cards"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab 3: Competitor Landscape -->
+    <section class="tab-content" id="tab-competitors">
+      <h2 class="section-heading">Competitor Threat vs Opportunity</h2>
+      <div class="chart-container chart-lg">
+        <div style="position:relative;height:380px;width:100%"><canvas id="scatterChart"></canvas></div>
+      </div>
+      <h3 class="section-subheading">Competitor Intelligence Cards</h3>
+      <div class="competitor-cards" id="competitor-cards"></div>
+    </section>
+
+    <!-- Tab 4: Strategic Insights -->
+    <section class="tab-content" id="tab-strategy">
+      <h2 class="section-heading">Risks & Opportunities</h2>
+      <div class="strategy-grid">
+        <div class="strategy-col">
+          <h3 class="strat-col-title strat-risk">Risks</h3>
+          <div id="risk-cards"></div>
+        </div>
+        <div class="strategy-col">
+          <h3 class="strat-col-title strat-opp">Opportunities</h3>
+          <div id="opp-cards"></div>
+        </div>
+      </div>
+
+      <h2 class="section-heading mt-lg">Multiverse EVP Positioning</h2>
+      <div class="evp-cards" id="evp-cards"></div>
+
+      <h2 class="section-heading mt-lg">Bridge Skills — Growth Indicators</h2>
+      <div class="chart-container">
+        <div style="position:relative;height:300px;width:100%"><canvas id="bridgeChart"></canvas></div>
+      </div>
+    </section>
+
+    <!-- Tab 5: Sources & Methodology -->
+    <section class="tab-content" id="tab-sources">
+      <div class="source-intro-card">
+        <h2 class="section-heading">Data Provenance & Transparency</h2>
+        <p>This dashboard synthesizes multiple data streams to produce a unified talent intelligence view. All figures are cross-referenced for accuracy and freshness.</p>
+      </div>
+      <div class="source-cards" id="source-cards"></div>
+
+      <h2 class="section-heading mt-lg">Methodology</h2>
+      <ol class="methodology-list" id="method-list"></ol>
+
+      <h2 class="section-heading mt-lg">Analytics Formulas</h2>
+      <div class="formula-cards">
+        <div class="formula-card">
+          <h4>Skill Density Index</h4>
+          <code class="formula">cohort_skills / total_pool = 100 / 701 = <strong>14.3%</strong></code>
+        </div>
+        <div class="formula-card">
+          <h4>Hiring Difficulty Score</h4>
+          <code class="formula">Composite of: supply/demand ratio (1.6:1) + median TTH (31 days) + pool concentration (100/701) = <strong>9/10</strong></code>
+        </div>
+      </div>
+
+      <div class="freshness-indicator">
+        <span class="freshness-dot"></span>
+        Data freshness: <strong>Mar-26</strong> <span class="freshness-note">(Mon-YY format)</span>
+      </div>
+    </section>
+
+    <footer class="dashboard-footer">
+      <a href="https://www.perplexity.ai/computer" target="_blank" rel="noopener noreferrer">Created with Perplexity Computer</a>
+    </footer>
+  </main>
+</div>
+<script src="./app.js"></script>
+</body>
+</html>
