@@ -11,8 +11,10 @@
   --color-surface: #FFFFFF;
   --color-surface-2: #F1F5F9;
   --color-surface-offset: #E2E8F0;
-  --color-divider: #CBD5E1;
-  --color-border: #E2E8F0;
+  --color-divider: #C3CEDD;
+  --color-border: #D3DCE9;
+  --panel-border-strong: #B9C6D8;
+  --panel-outline: 0 0 0 1px rgba(148, 163, 184, 0.25);
 
   /* Text */
   --color-text: #0F172A;
@@ -79,8 +81,10 @@
   --color-surface: #1E293B;
   --color-surface-2: #334155;
   --color-surface-offset: #1E293B;
-  --color-divider: #334155;
-  --color-border: #475569;
+  --color-divider: #4B607A;
+  --color-border: #5B6F86;
+  --panel-border-strong: #5D7390;
+  --panel-outline: 0 0 0 1px rgba(116, 144, 176, 0.22);
 
   --color-text: #E2E8F0;
   --color-text-muted: #94A3B8;
@@ -171,6 +175,10 @@
   object-fit: contain;
 }
 
+.logo-mark--x {
+  border-radius: 3px;
+}
+
 .header-left {
   display: flex;
   flex-direction: column;
@@ -226,9 +234,12 @@
 .theme-toggle {
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
+  justify-content: flex-start;
+  width: 100%;
+  min-height: 36px;
+  padding: 0 10px;
+  gap: 8px;
+  border: 1px solid rgba(148, 163, 184, 0.26);
   border-radius: var(--radius-md);
   color: var(--sidebar-text);
 }
@@ -236,6 +247,19 @@
 .theme-toggle:hover {
   background: var(--sidebar-hover);
   color: #E2E8F0;
+  border-color: rgba(148, 163, 184, 0.4);
+}
+
+.theme-toggle-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-toggle-text {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
 }
 
 /* Main content */
@@ -253,7 +277,8 @@
   align-items: center;
   justify-content: space-between;
   padding: var(--space-4) var(--space-6);
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--panel-border-strong);
+  box-shadow: 0 1px 0 rgba(15, 23, 42, 0.04);
   background: var(--color-surface);
   position: sticky;
   top: 0;
@@ -341,7 +366,8 @@
 
 .kpi-card {
   background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--panel-border-strong);
+  box-shadow: var(--panel-outline);
   border-radius: var(--radius-lg);
   padding: var(--space-4) var(--space-5);
   position: relative;
@@ -459,7 +485,8 @@
 
 .chart-container {
   background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--panel-border-strong);
+  box-shadow: var(--panel-outline);
   border-radius: var(--radius-lg);
   padding: var(--space-4) var(--space-5);
   margin-bottom: var(--space-5);
@@ -482,7 +509,8 @@
 
 .table-wrap {
   background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--panel-border-strong);
+  box-shadow: var(--panel-outline);
   border-radius: var(--radius-lg);
   padding: var(--space-4) var(--space-5);
   overflow-x: auto;
@@ -521,7 +549,8 @@
 
 .sankey-container {
   background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--panel-border-strong);
+  box-shadow: var(--panel-outline);
   border-radius: var(--radius-lg);
   padding: var(--space-4) var(--space-5);
   margin-bottom: var(--space-5);
@@ -557,7 +586,8 @@
 
 .flow-detail-card {
   background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--panel-border-strong);
+  box-shadow: var(--panel-outline);
   border-radius: var(--radius-lg);
   padding: var(--space-4) var(--space-5);
 }
@@ -635,7 +665,8 @@
 
 .comp-card {
   background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--panel-border-strong);
+  box-shadow: var(--panel-outline);
   border-radius: var(--radius-lg);
   padding: var(--space-4) var(--space-5);
 }
@@ -719,7 +750,8 @@
 
 .strat-card {
   background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--panel-border-strong);
+  box-shadow: var(--panel-outline);
   border-radius: var(--radius-md);
   padding: var(--space-3) var(--space-4);
   margin-bottom: var(--space-3);
@@ -801,7 +833,8 @@
 
 .source-intro-card {
   background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--panel-border-strong);
+  box-shadow: var(--panel-outline);
   border-radius: var(--radius-lg);
   padding: var(--space-5) var(--space-6);
   margin-bottom: var(--space-5);
@@ -822,7 +855,8 @@
 
 .source-card {
   background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--panel-border-strong);
+  box-shadow: var(--panel-outline);
   border-radius: var(--radius-lg);
   padding: var(--space-4) var(--space-5);
 }
@@ -852,7 +886,8 @@
 
 .methodology-list {
   background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--panel-border-strong);
+  box-shadow: var(--panel-outline);
   border-radius: var(--radius-lg);
   padding: var(--space-5) var(--space-6);
   padding-left: calc(var(--space-6) + 20px);
@@ -880,7 +915,8 @@
 
 .formula-card {
   background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--panel-border-strong);
+  box-shadow: var(--panel-outline);
   border-radius: var(--radius-lg);
   padding: var(--space-4) var(--space-5);
 }
@@ -952,7 +988,8 @@
 
 .level-card {
   background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--panel-border-strong);
+  box-shadow: var(--panel-outline);
   border-radius: var(--radius-lg);
   padding: var(--space-5);
   position: relative;
@@ -1130,6 +1167,14 @@
   }
   .logo-mark {
     height: 13px;
+  }
+  .theme-toggle {
+    justify-content: center;
+    padding: 0;
+    width: 36px;
+  }
+  .theme-toggle-text {
+    display: none;
   }
   .kpi-row {
     grid-template-columns: repeat(2, 1fr);
