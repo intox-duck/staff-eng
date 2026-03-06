@@ -159,10 +159,7 @@
 }
 
 .logo-strip--sidebar {
-  padding: 8px 12px;
-  border-radius: 12px;
-  background: rgba(248, 250, 252, 0.96);
-  box-shadow: 0 8px 24px rgba(2, 6, 23, 0.3);
+  padding: 0;
 }
 
 .logo-strip--header {
@@ -180,7 +177,9 @@
 }
 
 .logo-mark--x {
-  border-radius: 3px;
+  height: 13px;
+  min-height: 13px;
+  max-height: 13px;
 }
 
 .header-left {
@@ -1166,13 +1165,18 @@
     justify-content: center;
   }
   .logo-strip--sidebar {
-    padding: 6px 8px;
+    padding: 0;
     gap: 6px;
   }
   .logo-mark {
     height: 13px;
     min-height: 13px;
     max-height: 13px;
+  }
+  .logo-mark--x {
+    height: 9px;
+    min-height: 9px;
+    max-height: 9px;
   }
   .theme-toggle {
     justify-content: center;
@@ -1278,6 +1282,11 @@
     height: 16px;
     min-height: 16px;
     max-height: 16px;
+  }
+  .logo-mark--x {
+    height: 11px;
+    min-height: 11px;
+    max-height: 11px;
   }
 
   .toggle-btn {
