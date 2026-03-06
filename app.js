@@ -106,6 +106,8 @@ document.addEventListener("DOMContentLoaded", function() {
   var THEME_KEY = "ti-theme";
   var LOGO_X_LIGHT = "./x%20dep.png";
   var LOGO_X_DARK = "./x.png";
+  var LOGO_C2_LIGHT = "./C2%20-%20Talent%20Intelligence%20-G.png";
+  var LOGO_C2_DARK = "./C2%20-%20Talent%20Intelligence%20-darkmode.png";
   var theme = "light";
   function C() { return theme === "dark" ? DARK : LIGHT; }
 
@@ -115,6 +117,7 @@ document.addEventListener("DOMContentLoaded", function() {
   var toggleIcon = document.querySelector("[data-theme-icon]");
   var toggleLabel = document.querySelector("[data-theme-label]");
   var xThemeLogos = document.querySelectorAll("[data-logo-x]");
+  var c2ThemeLogos = document.querySelectorAll("[data-logo-c2]");
   var logoutButton = document.getElementById("logout-button");
   var prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
   var storedTheme = localStorage.getItem(THEME_KEY);
@@ -146,6 +149,12 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   }
 
+  function setC2LogoTheme(nextTheme) {
+    c2ThemeLogos.forEach(function(img) {
+      img.setAttribute("src", nextTheme === "dark" ? LOGO_C2_DARK : LOGO_C2_LIGHT);
+    });
+  }
+
   function applyTheme(nextTheme, options) {
     var skipRebuild = options && options.skipRebuild;
     theme = nextTheme;
@@ -153,6 +162,7 @@ document.addEventListener("DOMContentLoaded", function() {
     localStorage.setItem(THEME_KEY, theme);
     setThemeToggle(theme);
     setXLogoTheme(theme);
+    setC2LogoTheme(theme);
 
     if (!skipRebuild) {
       rebuildCharts();
