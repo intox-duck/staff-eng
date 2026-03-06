@@ -6,6 +6,6 @@
     "@vercel/functions": "^2.2.13"
   },
   "scripts": {
-    "check": "node --check app.js && node --check auth.js && node --check middleware.js && node --check api/login.js && node --check api/logout.js"
+    "check": "node --check app.js && node --check auth.js && node --check middleware.js && node --check api/login.js && node --check api/logout.js && node --check api/session.js"
   }
 }

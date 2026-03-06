@@ -2,7 +2,25 @@
    app.js — Talent Intelligence Dashboard
    ================================================ */
 /* global ChartDataLabels */
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", async function() {
+
+  try {
+    var authCheck = await fetch("/api/session", {
+      method: "GET",
+      credentials: "same-origin",
+      cache: "no-store"
+    });
+
+    if (!authCheck.ok) {
+      window.location.replace("/login");
+      return;
+    }
+  } catch {
+    window.location.replace("/login");
+    return;
+  }
+
+  document.documentElement.removeAttribute("data-auth-check");
 
   // Register datalabels plugin globally
   Chart.register(ChartDataLabels);
