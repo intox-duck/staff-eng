@@ -155,6 +155,7 @@
   align-items: center;
   gap: 10px;
   flex-wrap: nowrap;
+  white-space: nowrap;
 }
 
 .logo-strip--sidebar {
@@ -169,10 +170,13 @@
 }
 
 .logo-mark {
-  height: 20px;
+  height: 18px;
+  min-height: 18px;
+  max-height: 18px;
   width: auto;
   display: block;
   object-fit: contain;
+  flex: 0 0 auto;
 }
 
 .logo-mark--x {
@@ -1167,6 +1171,8 @@
   }
   .logo-mark {
     height: 13px;
+    min-height: 13px;
+    max-height: 13px;
   }
   .theme-toggle {
     justify-content: center;
@@ -1270,6 +1276,8 @@
 
   .logo-mark {
     height: 16px;
+    min-height: 16px;
+    max-height: 16px;
   }
 
   .toggle-btn {

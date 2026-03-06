@@ -80,6 +80,8 @@
     display: inline-flex;
     align-items: center;
     gap: 12px;
+    flex-wrap: nowrap;
+    white-space: nowrap;
     padding: 8px 12px;
     border-radius: 12px;
     background: rgba(226, 232, 240, 0.96);
@@ -88,10 +90,13 @@
   }
 
   .auth-logo {
-    height: 20px;
+    height: 18px;
+    min-height: 18px;
+    max-height: 18px;
     width: auto;
     display: block;
     object-fit: contain;
+    flex: 0 0 auto;
   }
 
   h1 {
@@ -193,6 +198,8 @@
 
     .auth-logo {
       height: 16px;
+      min-height: 16px;
+      max-height: 16px;
     }
   }
 </style>
