@@ -122,10 +122,6 @@ document.addEventListener("DOMContentLoaded", async function() {
   var LIGHT = { accent: "#0EA5E9", accent2: "#06B6D4", purple: "#8B5CF6", amber: "#F59E0B", green: "#10B981", red: "#F43F5E", text: "#0F172A", textMuted: "#64748B", textFaint: "#94A3B8", border: "#E2E8F0", surface: "#FFFFFF" };
   var DARK  = { accent: "#38BDF8", accent2: "#22D3EE", purple: "#A78BFA", amber: "#FBBF24", green: "#34D399", red: "#FB7185", text: "#E2E8F0", textMuted: "#94A3B8", textFaint: "#64748B", border: "#475569", surface: "#1E293B" };
   var THEME_KEY = "ti-theme";
-  var LOGO_X_LIGHT = "./x%20dep.png";
-  var LOGO_X_DARK = "./x.png";
-  var LOGO_C2_LIGHT = "./C2%20-%20Talent%20Intelligence%20-G.png";
-  var LOGO_C2_DARK = "./C2%20-%20Talent%20Intelligence%20-darkmode.png";
   var theme = "light";
   function C() { return theme === "dark" ? DARK : LIGHT; }
 
@@ -134,8 +130,6 @@ document.addEventListener("DOMContentLoaded", async function() {
   var toggle = document.querySelector("[data-theme-toggle]");
   var toggleIcon = document.querySelector("[data-theme-icon]");
   var toggleLabel = document.querySelector("[data-theme-label]");
-  var xThemeLogos = document.querySelectorAll("[data-logo-x]");
-  var c2ThemeLogos = document.querySelectorAll("[data-logo-c2]");
   var logoutButton = document.getElementById("logout-button");
   var prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
   var storedTheme = localStorage.getItem(THEME_KEY);
@@ -161,26 +155,12 @@ document.addEventListener("DOMContentLoaded", async function() {
     }
   }
 
-  function setXLogoTheme(nextTheme) {
-    xThemeLogos.forEach(function(img) {
-      img.setAttribute("src", nextTheme === "dark" ? LOGO_X_DARK : LOGO_X_LIGHT);
-    });
-  }
-
-  function setC2LogoTheme(nextTheme) {
-    c2ThemeLogos.forEach(function(img) {
-      img.setAttribute("src", nextTheme === "dark" ? LOGO_C2_DARK : LOGO_C2_LIGHT);
-    });
-  }
-
   function applyTheme(nextTheme, options) {
     var skipRebuild = options && options.skipRebuild;
     theme = nextTheme;
     root.setAttribute("data-theme", theme);
     localStorage.setItem(THEME_KEY, theme);
     setThemeToggle(theme);
-    setXLogoTheme(theme);
-    setC2LogoTheme(theme);
 
     if (!skipRebuild) {
       rebuildCharts();
@@ -208,6 +188,23 @@ document.addEventListener("DOMContentLoaded", async function() {
   var navBtns = document.querySelectorAll(".nav-item");
   var tabs = document.querySelectorAll(".tab-content");
   var rendered = {};
+  var roleFilter = "";
+  var pipelineFilter = "";
+  var candidateFilter = "";
+
+  function normaliseQuery(value) {
+    return String(value || "").trim().toLowerCase();
+  }
+
+  function matchesQuery(query, fields) {
+    if (!query) return true;
+    var haystack = fields.join(" ").toLowerCase();
+    return haystack.indexOf(query) !== -1;
+  }
+
+  function emptyRow(colspan, text) {
+    return '<tr class="table-empty-row"><td colspan="' + colspan + '">' + text + "</td></tr>";
+  }
 
   navBtns.forEach(function(btn) {
     btn.addEventListener("click", function() {
@@ -222,6 +219,85 @@ document.addEventListener("DOMContentLoaded", async function() {
       if (id === "sources" && !rendered.src) { buildSourcesTab(); rendered.src = true; }
     });
   });
+
+  function initElasticSearch() {
+    var controls = document.querySelectorAll("[data-elastic-search]");
+
+    controls.forEach(function(control) {
+      var input = control.querySelector("input[type='search']");
+      var toggleButton = control.querySelector("[data-search-toggle]");
+      var clearButton = control.querySelector("[data-search-clear]");
+
+      function setExpanded(nextExpanded) {
+        control.setAttribute("data-expanded", nextExpanded ? "true" : "false");
+      }
+
+      function syncValueState() {
+        control.setAttribute("data-has-value", input && input.value ? "true" : "false");
+      }
+
+      if (toggleButton && input) {
+        toggleButton.addEventListener("click", function() {
+          setExpanded(true);
+          input.focus();
+        });
+      }
+
+      if (input) {
+        input.addEventListener("focus", function() {
+          setExpanded(true);
+        });
+
+        input.addEventListener("blur", function() {
+          if (!input.value.trim()) {
+            setExpanded(false);
+          }
+        });
+
+        input.addEventListener("input", function() {
+          syncValueState();
+        });
+      }
+
+      if (clearButton && input) {
+        clearButton.addEventListener("click", function() {
+          input.value = "";
+          input.dispatchEvent(new Event("input", { bubbles: true }));
+          syncValueState();
+          input.focus();
+        });
+      }
+
+      syncValueState();
+    });
+  }
+
+  function bindSearchInputs() {
+    var roleSearchInput = document.querySelector("[data-role-search]");
+    var pipelineSearchInput = document.querySelector("[data-pipeline-search]");
+    var candidateSearchInput = document.querySelector("[data-candidate-search]");
+
+    if (roleSearchInput) {
+      roleSearchInput.addEventListener("input", function() {
+        roleFilter = normaliseQuery(roleSearchInput.value);
+        buildSalaryTable();
+      });
+    }
+
+    if (pipelineSearchInput) {
+      pipelineSearchInput.addEventListener("input", function() {
+        pipelineFilter = normaliseQuery(pipelineSearchInput.value);
+        buildPipelineTable();
+      });
+    }
+
+    if (candidateSearchInput) {
+      candidateSearchInput.addEventListener("input", function() {
+        candidateFilter = normaliseQuery(candidateSearchInput.value);
+        buildCandidateTable();
+      });
+    }
+  }
 
   // ---- CHART STORE ----
   var charts = {};
@@ -352,7 +428,16 @@ document.addEventListener("DOMContentLoaded", async function() {
   function buildSalaryTable() {
     var tb = document.getElementById("salary-table-body");
     if (!tb) return;
-    tb.innerHTML = DATA.salaryRoles.map(function(r){
+    var rows = DATA.salaryRoles.filter(function(r) {
+      return matchesQuery(roleFilter, [r.role, r.sector]);
+    });
+
+    if (!rows.length) {
+      tb.innerHTML = emptyRow(7, "No roles match this search.");
+      return;
+    }
+
+    tb.innerHTML = rows.map(function(r){
       return "<tr><td><strong>"+r.role+"</strong><br><span style='font-size:11px;color:var(--color-text-muted)'>"+r.sector+"</span></td><td>\u00a3"+r.baseP25.toLocaleString()+"</td><td>\u00a3"+r.baseP50.toLocaleString()+"</td><td>\u00a3"+r.baseP75.toLocaleString()+"</td><td>\u00a3"+r.tcP25Lo.toLocaleString()+" \u2013 \u00a3"+r.tcP25Hi.toLocaleString()+"</td><td>\u00a3"+r.tcP50Lo.toLocaleString()+" \u2013 \u00a3"+r.tcP50Hi.toLocaleString()+"</td><td>\u00a3"+r.tcP75Lo.toLocaleString()+" \u2013 \u00a3"+r.tcP75Hi.toLocaleString()+"</td></tr>";
     }).join("");
   }
@@ -372,7 +457,10 @@ document.addEventListener("DOMContentLoaded", async function() {
 
   // ---- TALENT TAB ----
   function buildTalentTab() {
-    buildSankey(); buildPoolDonut(); buildSkillsChart(); buildFlowCards();
+    buildSankey();
+    buildPoolDonut();
+    buildSkillsChart();
+    buildPipelineTable();
   }
 
   function buildSankey() {
@@ -430,17 +518,41 @@ document.addEventListener("DOMContentLoaded", async function() {
     });
   }
 
-  function buildFlowCards() {
-    document.getElementById("donor-cards").innerHTML = DATA.donors.map(function(d){
-      return '<div class="flow-item"><div><div class="flow-company">'+d.company+'</div><div class="flow-meta">'+d.reason+'</div></div><div style="text-align:right"><div class="flow-growth negative">'+d.growth+'%</div><div class="flow-headcount">'+d.headcount+' pros</div></div></div>';
-    }).join("");
-    document.getElementById("gainer-cards").innerHTML = DATA.gainers.map(function(d){
-      return '<div class="flow-item"><div><div class="flow-company">'+d.company+'</div><div class="flow-meta">'+d.reason+'</div></div><div style="text-align:right"><div class="flow-growth positive">+'+d.growth+'%</div><div class="flow-headcount">'+d.headcount+' pros</div></div></div>';
+  function getPipelineRows() {
+    var donors = DATA.donors.map(function(d) {
+      return { stage: "Donor", company: d.company, headcount: d.headcount, growth: d.growth, context: d.reason };
+    });
+    var gainers = DATA.gainers.map(function(g) {
+      return { stage: "Gainer", company: g.company, headcount: g.headcount, growth: g.growth, context: g.reason };
+    });
+
+    return donors.concat(gainers);
+  }
+
+  function buildPipelineTable() {
+    var tb = document.getElementById("pipeline-table-body");
+    if (!tb) return;
+
+    var rows = getPipelineRows().filter(function(row) {
+      return matchesQuery(pipelineFilter, [row.stage, row.company, row.context, row.growth]);
+    });
+
+    if (!rows.length) {
+      tb.innerHTML = emptyRow(5, "No pipeline rows match this search.");
+      return;
+    }
+
+    tb.innerHTML = rows.map(function(row) {
+      var growth = row.growth > 0 ? "+" + row.growth : String(row.growth);
+      return "<tr><td><strong>" + row.stage + "</strong></td><td>" + row.company + "</td><td>" + row.headcount + "</td><td>" + growth + "%</td><td>" + row.context + "</td></tr>";
     }).join("");
   }
 
   // ---- COMPETITOR TAB ----
-  function buildCompetitorTab() { buildScatter(); buildCompCards(); }
+  function buildCompetitorTab() {
+    buildScatter();
+    buildCandidateTable();
+  }
 
   function buildScatter() {
     kill("scatter");
@@ -476,10 +588,22 @@ document.addEventListener("DOMContentLoaded", async function() {
     });
   }
 
-  function buildCompCards() {
-    document.getElementById("competitor-cards").innerHTML = DATA.competitors.map(function(comp){
-      var neg=comp.growth<0, gs=neg?"background:rgba(244,63,94,0.1);color:#F43F5E":"background:rgba(16,185,129,0.1);color:#10B981";
-      return '<div class="comp-card"><div class="comp-card-header"><span class="comp-card-name">'+comp.company+'</span><span class="comp-card-growth" style="'+gs+'">'+(comp.growth>0?"+":"")+comp.growth+'% YoY</span></div><div class="comp-section"><div class="comp-section-label">Value Proposition</div><div class="comp-section-text">'+comp.vp+'</div></div><div class="comp-section"><div class="comp-section-label">Weakness to Exploit</div><div class="comp-section-text">'+comp.weakness+'</div></div><div class="comp-section"><div class="comp-section-label">Recruitment Action</div><div class="comp-section-text">'+comp.action+'</div></div></div>';
+  function buildCandidateTable() {
+    var tb = document.getElementById("candidate-table-body");
+    if (!tb) return;
+
+    var rows = DATA.competitors.filter(function(comp) {
+      return matchesQuery(candidateFilter, [comp.company, comp.vp, comp.weakness, comp.action, comp.growth, comp.opp, comp.threat]);
+    });
+
+    if (!rows.length) {
+      tb.innerHTML = emptyRow(6, "No candidates match this search.");
+      return;
+    }
+
+    tb.innerHTML = rows.map(function(comp) {
+      var growth = comp.growth > 0 ? "+" + comp.growth : String(comp.growth);
+      return "<tr><td><strong>" + comp.company + "</strong><br><span style='font-size:11px;color:var(--color-text-muted)'>" + comp.vp + "</span></td><td>" + comp.headcount + "</td><td>" + growth + "%</td><td>" + comp.opp + "/10</td><td>" + comp.threat + "/10</td><td>" + comp.action + "</td></tr>";
     }).join("");
   }
 
@@ -535,8 +659,12 @@ document.addEventListener("DOMContentLoaded", async function() {
   }
 
   // ---- INIT ----
+  initElasticSearch();
+  bindSearchInputs();
   buildLevelCards();
   buildSalaryChart();
   buildSalaryTable();
+  buildPipelineTable();
+  buildCandidateTable();
 
 });

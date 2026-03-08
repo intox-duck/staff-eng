@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex,nofollow">
-<title>Sign In | Staff SWE London</title>
-<link rel="icon" type="image/png" href="./multiverse1.png">
+<title>Sign In | Zheetz Board Workspace</title>
+<link rel="icon" type="image/png" href="./zheetz.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -77,34 +77,13 @@
     text-transform: uppercase;
   }
 
-  .auth-logo-strip {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: nowrap;
-    white-space: nowrap;
-    padding: 0;
+  .auth-brand {
+    display: inline-block;
+    width: clamp(140px, 28vw, 190px);
     margin-bottom: 18px;
-  }
-
-  .auth-logo {
-    height: 30px;
-    min-height: 30px;
-    max-height: 30px;
-    width: auto;
-    display: block;
-    object-fit: contain;
-    flex: 0 0 auto;
-  }
-
-  .auth-logo--x {
-    height: 21px;
-    min-height: 21px;
-    max-height: 21px;
-  }
-
-  .auth-logo--chapter2 {
-    border-radius: 4px;
+    border-radius: 14px;
+    border: 1px solid rgba(148, 163, 184, 0.25);
+    box-shadow: 0 16px 32px rgba(2, 6, 23, 0.32);
   }
 
   h1 {
@@ -204,16 +183,8 @@
       padding: 28px;
     }
 
-    .auth-logo {
-      height: 26px;
-      min-height: 26px;
-      max-height: 26px;
-    }
-
-    .auth-logo--x {
-      height: 18px;
-      min-height: 18px;
-      max-height: 18px;
+    .auth-brand {
+      width: min(180px, 55vw);
     }
   }
 </style>
@@ -221,15 +192,11 @@
 <body>
   <div class="shell">
     <section class="intro" aria-hidden="true">
-      <div class="auth-logo-strip" role="img" aria-label="Multiverse, X, and Chapter2 logos">
-        <img class="auth-logo" src="./multiverse1.png" alt="Multiverse">
-        <img class="auth-logo auth-logo--x" src="./x%20dep.png" alt="X">
-        <img class="auth-logo auth-logo--chapter2" src="./C2%20-%20Talent%20Intelligence%20-darkmode.png" alt="Chapter2">
-      </div>
+      <img class="auth-brand" src="./zheetz.png" alt="Zheetz">
       <div class="eyebrow">Protected Access</div>
-      <h1>Talent Intelligence<br>Dashboard</h1>
+      <h1>Zheetz Board<br>Workspace</h1>
       <p>
-        This report is access-controlled at the Vercel edge. Sign in with the provisioned account to view the dashboard.
+        This workspace is access-controlled at the Vercel edge. Sign in with the provisioned account to continue.
       </p>
     </section>
 
