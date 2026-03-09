@@ -15,6 +15,8 @@
   --color-border: #D3DCE9;
   --panel-border-strong: #B9C6D8;
   --panel-outline: 0 0 0 1px rgba(148, 163, 184, 0.25);
+  --card-bottom-edge: rgba(14, 165, 233, 0.36);
+  --card-raise-shadow: 0 12px 18px -14px rgba(14, 165, 233, 0.95);
   --sheet-row-alt: rgba(148, 163, 184, 0.08);
 
   /* Text */
@@ -91,6 +93,8 @@
   --color-border: #5B6F86;
   --panel-border-strong: #5D7390;
   --panel-outline: 0 0 0 1px rgba(116, 144, 176, 0.22);
+  --card-bottom-edge: rgba(56, 189, 248, 0.44);
+  --card-raise-shadow: 0 12px 20px -14px rgba(34, 211, 238, 0.95);
   --sheet-row-alt: rgba(51, 65, 85, 0.45);
 
   --color-text: #E2E8F0;
@@ -513,6 +517,54 @@
 }
 
 .chart-lg {
+}
+
+.chart-container--candidate-3d {
+  margin-top: var(--space-4);
+  background:
+    linear-gradient(165deg, rgba(56, 189, 248, 0.24) 0%, rgba(34, 211, 238, 0.14) 42%, rgba(14, 165, 233, 0.08) 100%),
+    var(--color-surface);
+  overflow: hidden;
+}
+
+.chart-container--candidate-3d::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(
+      -16deg,
+      rgba(255, 255, 255, 0.24) 0 1px,
+      transparent 1px 16px
+    );
+  opacity: 0.42;
+}
+
+.chart-container--candidate-3d::after {
+  content: "";
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 8px;
+  height: 10px;
+  border-radius: 8px;
+  background: rgba(14, 165, 233, 0.22);
+  filter: blur(6px);
+  pointer-events: none;
+}
+
+[data-theme="dark"] .chart-container--candidate-3d::before {
+  opacity: 0.24;
+}
+
+[data-theme="dark"] .chart-container--candidate-3d::after {
+  background: rgba(56, 189, 248, 0.28);
+}
+
+.chart-container--candidate-3d > div {
+  position: relative;
+  z-index: 1;
 }
 
 .hidden {
@@ -1041,15 +1093,15 @@
   margin-bottom: var(--space-2);
 }
 
-.source-card-link {
+.source-name-link {
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--color-accent);
   text-decoration: underline;
   text-underline-offset: 2px;
 }
 
-.source-card-link:hover {
+.source-name-link:hover {
   color: var(--color-accent-hover);
 }
 
@@ -1114,7 +1166,7 @@
 
 .formula {
   display: block;
-  font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+  font-family: var(--font-body);
   font-size: 12px;
   color: var(--color-accent);
   background: var(--color-surface-2);
@@ -1303,6 +1355,26 @@
   padding-top: var(--space-3);
   border-top: 1px solid var(--color-border);
   font-style: italic;
+}
+
+/* Raised bottom-edge aesthetic for card surfaces */
+.kpi-card,
+.chart-container,
+.workspace-panel,
+.sankey-container,
+.flow-detail-card,
+.comp-card,
+.strat-card,
+.evp-card,
+.source-intro-card,
+.source-card,
+.methodology-list,
+.formula-card,
+.level-card {
+  box-shadow: var(--panel-outline), var(--card-raise-shadow);
+  border-bottom-width: 3px;
+  border-bottom-style: solid;
+  border-bottom-color: var(--card-bottom-edge);
 }
 
 /* ================================================

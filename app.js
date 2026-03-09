@@ -98,11 +98,11 @@ document.addEventListener("DOMContentLoaded", async function() {
       { gap: "Hybrid Flexibility Edge", detail: "81% of tech professionals now treat flexible work as non-negotiable, making a credible hybrid model a decisive offer-stage lever." }
     ],
     sources: [
-      { source: "LinkedIn Talent Intelligence", reports: 9, desc: "Core validated talent pool, skill penetration, employer flow, and density analysis inputs" },
-      { source: "Multiverse Internal Inputs", reports: 4, desc: "Role definition, EVP, experimentation/AI playbooks, and internal operating context", url: "https://www.multiverse.io/en-GB/blog/multiverse-s-playbook-for-creating-a-culture-of-experimentation" },
-      { source: "Market & Compensation Benchmarks", reports: 12, desc: "Salary guides, hiring outlooks, and London market trend references used in the blueprint", url: "https://www.roberthalf.com/gb/en/insights/salary-guide/technology" },
-      { source: "Community & Sentiment Signals", reports: 11, desc: "Reddit and practitioner discourse used to triangulate culture and attrition narratives", url: "https://www.reddit.com/r/ExperiencedDevs/comments/t0ilqg/is_the_wlb_and_psc_culture_at_meta_as_bad_as_some/" },
-      { source: "Full Works Cited Corpus", reports: 47, desc: "All cited references imported from Talent Blueprint for Staff Engineer.docx", url: "#works-cited-list" }
+      { source: "LinkedIn Talent Intelligence", reports: 9, desc: "Talent pool baseline and employer-flow signal for London Staff+ hiring.", url: "https://business.linkedin.com/talent-solutions/talent-intelligence" },
+      { source: "Multiverse Internal Inputs", reports: 4, desc: "Role, EVP, and delivery context from internal-facing materials.", url: "https://www.multiverse.io/en-GB/blog/multiverse-s-playbook-for-creating-a-culture-of-experimentation" },
+      { source: "Market & Compensation Benchmarks", reports: 12, desc: "External salary and hiring trend benchmarks for offer calibration.", url: "https://www.roberthalf.com/gb/en/insights/salary-guide/technology" },
+      { source: "Community & Sentiment Signals", reports: 11, desc: "Practitioner sentiment used to validate culture and attrition patterns.", url: "https://www.reddit.com/r/ExperiencedDevs/comments/t0ilqg/is_the_wlb_and_psc_culture_at_meta_as_bad_as_some/" },
+      { source: "Full Works Cited Corpus", reports: 47, desc: "Complete citation list for traceability and review.", url: "#works-cited-list" }
     ],
     methodology: [
       "TAM of 701 validated via core boolean: Python + AWS + AI experience in London Area at Staff+ seniority",
@@ -734,12 +734,13 @@ document.addEventListener("DOMContentLoaded", async function() {
   // ---- SOURCES TAB ----
   function buildSourcesTab() {
     document.getElementById("source-cards").innerHTML = DATA.sources.map(function(s){
-      var link = s.url
-        ? (s.url.charAt(0) === "#"
-          ? '<a class="source-card-link" href="' + s.url + '">View references</a>'
-          : '<a class="source-card-link" href="' + s.url + '" target="_blank" rel="noopener noreferrer">Open source</a>')
-        : "";
-      return '<div class="source-card"><div class="source-card-count">'+s.reports+'</div><div class="source-card-name">'+s.source+'</div><div class="source-card-desc">'+s.desc+'</div>' + link + "</div>";
+      var sourceName = s.source;
+      if (s.url) {
+        sourceName = s.url.charAt(0) === "#"
+          ? '<a class="source-name-link" href="' + s.url + '">' + s.source + "</a>"
+          : '<a class="source-name-link" href="' + s.url + '" target="_blank" rel="noopener noreferrer">' + s.source + "</a>";
+      }
+      return '<div class="source-card"><div class="source-card-count">'+s.reports+'</div><div class="source-card-name">'+sourceName+'</div><div class="source-card-desc">'+s.desc+"</div></div>";
     }).join("");
     document.getElementById("method-list").innerHTML = DATA.methodology.map(function(m){ return "<li>"+m+"</li>"; }).join("");
     document.getElementById("works-cited-list").innerHTML = DATA.worksCited.map(function(ref){ return "<li>"+formatWorksCitedEntry(ref)+"</li>"; }).join("");
