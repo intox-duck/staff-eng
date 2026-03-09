@@ -99,10 +99,10 @@ document.addEventListener("DOMContentLoaded", async function() {
     ],
     sources: [
       { source: "LinkedIn Talent Intelligence", reports: 9, desc: "Core validated talent pool, skill penetration, employer flow, and density analysis inputs" },
-      { source: "Multiverse Internal Inputs", reports: 4, desc: "Role definition, EVP, experimentation/AI playbooks, and internal operating context" },
-      { source: "Market & Compensation Benchmarks", reports: 12, desc: "Salary guides, hiring outlooks, and London market trend references used in the blueprint" },
-      { source: "Community & Sentiment Signals", reports: 11, desc: "Reddit and practitioner discourse used to triangulate culture and attrition narratives" },
-      { source: "Full Works Cited Corpus", reports: 47, desc: "All cited references imported from Talent Blueprint for Staff Engineer.docx" }
+      { source: "Multiverse Internal Inputs", reports: 4, desc: "Role definition, EVP, experimentation/AI playbooks, and internal operating context", url: "https://www.multiverse.io/en-GB/blog/multiverse-s-playbook-for-creating-a-culture-of-experimentation" },
+      { source: "Market & Compensation Benchmarks", reports: 12, desc: "Salary guides, hiring outlooks, and London market trend references used in the blueprint", url: "https://www.roberthalf.com/gb/en/insights/salary-guide/technology" },
+      { source: "Community & Sentiment Signals", reports: 11, desc: "Reddit and practitioner discourse used to triangulate culture and attrition narratives", url: "https://www.reddit.com/r/ExperiencedDevs/comments/t0ilqg/is_the_wlb_and_psc_culture_at_meta_as_bad_as_some/" },
+      { source: "Full Works Cited Corpus", reports: 47, desc: "All cited references imported from Talent Blueprint for Staff Engineer.docx", url: "#works-cited-list" }
     ],
     methodology: [
       "TAM of 701 validated via core boolean: Python + AWS + AI experience in London Area at Staff+ seniority",
@@ -177,12 +177,9 @@ document.addEventListener("DOMContentLoaded", async function() {
   var toggleIcon = document.querySelector("[data-theme-icon]");
   var toggleLabel = document.querySelector("[data-theme-label]");
   var logoutButton = document.getElementById("logout-button");
-  var prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
   var storedTheme = localStorage.getItem(THEME_KEY);
   if (storedTheme === "light" || storedTheme === "dark") {
     theme = storedTheme;
-  } else if (prefersDark) {
-    theme = "dark";
   }
 
   function setThemeToggle(nextTheme) {
@@ -613,20 +610,76 @@ document.addEventListener("DOMContentLoaded", async function() {
           datalabels: { display: false }
         },
         scales: {
-          x: { title: { display: true, text: "Opportunity Score \u2192", color: c.textMuted, font: { weight: "bold" } }, ticks: { color: c.textFaint }, grid: { color: c.border+"33" }, min: 2, max: 10 },
-          y: { title: { display: true, text: "\u2190 Threat Score", color: c.textMuted, font: { weight: "bold" } }, ticks: { color: c.textFaint }, grid: { color: c.border+"33" }, min: 3, max: 10 }
+          x: { title: { display: true, text: "Opportunity Score \u2192", color: c.textMuted, font: { weight: "bold" } }, ticks: { color: c.textFaint }, grid: { color: c.border+"22" }, min: 2, max: 10 },
+          y: { title: { display: true, text: "\u2190 Threat Score", color: c.textMuted, font: { weight: "bold" } }, ticks: { color: c.textFaint }, grid: { color: c.border+"22" }, min: 3, max: 10 }
         }
       },
       plugins: [{
         id: "quad",
-        afterDraw: function(chart) {
+        beforeDraw: function(chart) {
+          var a = chart.chartArea;
+          var cx = chart.ctx;
+          if (!a) return;
+          var g = cx.createLinearGradient(a.left, a.top, a.right, a.bottom);
+          g.addColorStop(0, c.accent + "10");
+          g.addColorStop(1, c.accent2 + "08");
+          cx.save();
+          cx.fillStyle = g;
+          cx.fillRect(a.left, a.top, a.right - a.left, a.bottom - a.top);
+          cx.restore();
+        },
+        beforeDatasetsDraw: function(chart) {
           var a=chart.chartArea, cx=chart.ctx, mx=(a.left+a.right)/2, my=(a.top+a.bottom)/2;
-          cx.save(); cx.font="600 10px Figtree,sans-serif"; cx.fillStyle=c.textFaint; cx.textAlign="center";
-          cx.fillText("Low Opp / High Threat",(a.left+mx)/2,a.top+16); cx.fillText("High Opp / High Threat",(mx+a.right)/2,a.top+16);
-          cx.fillText("Low Opp / Low Threat",(a.left+mx)/2,a.bottom-8); cx.fillText("High Opp / Low Threat",(mx+a.right)/2,a.bottom-8);
-          cx.strokeStyle=c.border+"66"; cx.lineWidth=1; cx.setLineDash([4,4]);
-          cx.beginPath(); cx.moveTo(mx,a.top); cx.lineTo(mx,a.bottom); cx.stroke();
-          cx.beginPath(); cx.moveTo(a.left,my); cx.lineTo(a.right,my); cx.stroke(); cx.setLineDash([]);
+          var depth = 12;
+          var steps = 6;
+          var i;
+          cx.save();
+          cx.strokeStyle = c.border + "6B";
+          cx.lineWidth = 1;
+          for (i = 0; i <= steps; i++) {
+            var y = a.top + (a.bottom - a.top) * (i / steps);
+            var lift = depth * (1 - i / steps);
+            cx.beginPath();
+            cx.moveTo(a.left + lift, y - lift);
+            cx.lineTo(a.right + lift, y - lift);
+            cx.stroke();
+            cx.beginPath();
+            cx.moveTo(a.left, y);
+            cx.lineTo(a.left + lift, y - lift);
+            cx.moveTo(a.right, y);
+            cx.lineTo(a.right + lift, y - lift);
+            cx.stroke();
+          }
+          cx.beginPath();
+          cx.moveTo(a.left + depth, a.top - depth);
+          cx.lineTo(a.right + depth, a.top - depth);
+          cx.lineTo(a.right, a.top);
+          cx.lineTo(a.left, a.top);
+          cx.closePath();
+          cx.stroke();
+          cx.strokeStyle=c.border+"78";
+          cx.setLineDash([4,4]);
+          cx.beginPath();
+          cx.moveTo(mx,a.top);
+          cx.lineTo(mx,a.bottom);
+          cx.stroke();
+          cx.beginPath();
+          cx.moveTo(a.left,my);
+          cx.lineTo(a.right,my);
+          cx.stroke();
+          cx.setLineDash([]);
+          cx.restore();
+        },
+        afterDatasetsDraw: function(chart) {
+          var a=chart.chartArea, cx=chart.ctx, mx=(a.left+a.right)/2;
+          cx.save();
+          cx.font="600 10px Figtree,sans-serif";
+          cx.fillStyle=c.textFaint;
+          cx.textAlign="center";
+          cx.fillText("Low Opp / High Threat",(a.left+mx)/2,a.top+16);
+          cx.fillText("High Opp / High Threat",(mx+a.right)/2,a.top+16);
+          cx.fillText("Low Opp / Low Threat",(a.left+mx)/2,a.bottom-8);
+          cx.fillText("High Opp / Low Threat",(mx+a.right)/2,a.bottom-8);
           chart.data.datasets[0].data.forEach(function(p,i){ var m=chart.getDatasetMeta(0).data[i]; if(m){ cx.font="600 10px Figtree,sans-serif"; cx.fillStyle=c.text; cx.textAlign="center"; cx.fillText(p.company,m.x,m.y-p.r-4); } });
           cx.restore();
         }
@@ -668,13 +721,28 @@ document.addEventListener("DOMContentLoaded", async function() {
     }).join("");
   }
 
+  function formatWorksCitedEntry(ref) {
+    var raw = String(ref || "");
+    var urlMatch = raw.match(/https?:\/\/\S+/);
+    if (!urlMatch) return raw;
+    var href = urlMatch[0].replace(/[),.;]+$/, "");
+    var pre = raw.slice(0, urlMatch.index).replace(/[,\s]+$/, "");
+    var lead = pre ? pre + ", " : "";
+    return lead + '<a href="' + href + '" target="_blank" rel="noopener noreferrer">' + href + "</a>";
+  }
+
   // ---- SOURCES TAB ----
   function buildSourcesTab() {
     document.getElementById("source-cards").innerHTML = DATA.sources.map(function(s){
-      return '<div class="source-card"><div class="source-card-count">'+s.reports+'</div><div class="source-card-name">'+s.source+'</div><div class="source-card-desc">'+s.desc+'</div></div>';
+      var link = s.url
+        ? (s.url.charAt(0) === "#"
+          ? '<a class="source-card-link" href="' + s.url + '">View references</a>'
+          : '<a class="source-card-link" href="' + s.url + '" target="_blank" rel="noopener noreferrer">Open source</a>')
+        : "";
+      return '<div class="source-card"><div class="source-card-count">'+s.reports+'</div><div class="source-card-name">'+s.source+'</div><div class="source-card-desc">'+s.desc+'</div>' + link + "</div>";
     }).join("");
     document.getElementById("method-list").innerHTML = DATA.methodology.map(function(m){ return "<li>"+m+"</li>"; }).join("");
-    document.getElementById("works-cited-list").innerHTML = DATA.worksCited.map(function(ref){ return "<li>"+ref+"</li>"; }).join("");
+    document.getElementById("works-cited-list").innerHTML = DATA.worksCited.map(function(ref){ return "<li>"+formatWorksCitedEntry(ref)+"</li>"; }).join("");
   }
 
   // ---- REBUILD ON THEME CHANGE ----

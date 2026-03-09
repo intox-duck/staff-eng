@@ -21,7 +21,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex,nofollow">
-<title>Zheetz Board Workspace</title>
+<title>Staff Engineer Dashboard</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -29,7 +29,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
 <script src="https://unpkg.com/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>
-<link rel="icon" type="image/png" href="./zheetz.png">
+<link rel="icon" type="image/svg+xml" href="./favicon-gbp.svg">
 <link rel="stylesheet" href="./base.css">
 <link rel="stylesheet" href="./style.css">
 <style>
@@ -46,7 +46,13 @@ document.documentElement.setAttribute("data-auth-check", "pending");
   <!-- Sidebar -->
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-logo">
-      <img class="brand-logo brand-logo--sidebar" src="./zheetz.png" alt="Zheetz">
+      <div class="brand-row brand-row--sidebar" aria-label="Brand logos">
+        <img class="brand-mark brand-mark--primary" src="./multiverse1.png" alt="Multiverse">
+        <img class="brand-mark brand-mark--x brand-mark--light" src="./brand-x-light.png" alt="X">
+        <img class="brand-mark brand-mark--x brand-mark--dark" src="./brand-x-dark.png" alt="X">
+        <img class="brand-mark brand-mark--ti brand-mark--light" src="./brand-ti-light.png" alt="Talent Intelligence">
+        <img class="brand-mark brand-mark--ti brand-mark--dark" src="./brand-ti-dark.png" alt="Talent Intelligence">
+      </div>
     </div>
     <nav class="sidebar-nav" role="navigation" aria-label="Main navigation">
       <button class="nav-item active" data-tab="salary" aria-current="page">
@@ -85,9 +91,7 @@ document.documentElement.setAttribute("data-auth-check", "pending");
     <!-- Header bar -->
     <header class="top-header">
       <div class="header-left">
-        <img class="brand-logo brand-logo--header" src="./zheetz.png" alt="Zheetz">
-        <h1 class="page-title">Board Workspace <span class="title-location">London</span></h1>
-        <p class="page-subtitle">Zheetz Talent Intelligence</p>
+        <h1 class="page-title">Staff Engineer - London, multiverse</h1>
       </div>
       <div class="header-right">
         <button class="header-action" id="logout-button" type="button">Sign out</button>
