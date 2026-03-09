@@ -723,24 +723,24 @@ document.addEventListener("DOMContentLoaded", async function() {
 
   function formatWorksCitedEntry(ref) {
     var raw = String(ref || "");
+    var clean = raw.replace(/\s*,?\s*accessed on [^,]+,\s*/i, ", ").replace(/\s{2,}/g, " ").trim();
     var urlMatch = raw.match(/https?:\/\/\S+/);
-    if (!urlMatch) return raw;
+    if (!urlMatch) return clean;
     var href = urlMatch[0].replace(/[),.;]+$/, "");
-    var pre = raw.slice(0, urlMatch.index).replace(/[,\s]+$/, "");
-    var lead = pre ? pre + ", " : "";
-    return lead + '<a href="' + href + '" target="_blank" rel="noopener noreferrer">' + href + "</a>";
+    var pre = clean.slice(0, clean.indexOf(urlMatch[0])).replace(/[,\s]+$/, "");
+    return pre + ' <a href="' + href + '" target="_blank" rel="noopener noreferrer">Source</a>';
   }
 
   // ---- SOURCES TAB ----
   function buildSourcesTab() {
     document.getElementById("source-cards").innerHTML = DATA.sources.map(function(s){
-      var sourceName = s.source;
+      var descLink = "";
       if (s.url) {
-        sourceName = s.url.charAt(0) === "#"
-          ? '<a class="source-name-link" href="' + s.url + '">' + s.source + "</a>"
-          : '<a class="source-name-link" href="' + s.url + '" target="_blank" rel="noopener noreferrer">' + s.source + "</a>";
+        descLink = s.url.charAt(0) === "#"
+          ? ' <a class="source-inline-link" href="' + s.url + '">Source</a>'
+          : ' <a class="source-inline-link" href="' + s.url + '" target="_blank" rel="noopener noreferrer">Source</a>';
       }
-      return '<div class="source-card"><div class="source-card-count">'+s.reports+'</div><div class="source-card-name">'+sourceName+'</div><div class="source-card-desc">'+s.desc+"</div></div>";
+      return '<div class="source-card"><div class="source-card-count">'+s.reports+'</div><div class="source-card-name">'+s.source+'</div><div class="source-card-desc">'+s.desc+descLink+"</div></div>";
     }).join("");
     document.getElementById("method-list").innerHTML = DATA.methodology.map(function(m){ return "<li>"+m+"</li>"; }).join("");
     document.getElementById("works-cited-list").innerHTML = DATA.worksCited.map(function(ref){ return "<li>"+formatWorksCitedEntry(ref)+"</li>"; }).join("");

@@ -1093,7 +1093,7 @@
   margin-bottom: var(--space-2);
 }
 
-.source-name-link {
+.source-inline-link {
   font-size: 12px;
   font-weight: 700;
   color: var(--color-accent);
@@ -1101,7 +1101,7 @@
   text-underline-offset: 2px;
 }
 
-.source-name-link:hover {
+.source-inline-link:hover {
   color: var(--color-accent-hover);
 }
 
