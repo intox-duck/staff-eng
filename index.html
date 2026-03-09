@@ -90,8 +90,6 @@ document.documentElement.setAttribute("data-auth-check", "pending");
         <p class="page-subtitle">Zheetz Talent Intelligence</p>
       </div>
       <div class="header-right">
-        <span class="data-badge">Data: Mar-26</span>
-        <span class="data-badge source-badge">LinkedIn TI + Market Research</span>
         <button class="header-action" id="logout-button" type="button">Sign out</button>
       </div>
     </header>
@@ -105,7 +103,7 @@ document.documentElement.setAttribute("data-auth-check", "pending");
           <div class="kpi-context">Professionals</div>
         </div>
         <div class="kpi-card">
-          <div class="kpi-label">Elite Talent Density</div>
+          <div class="kpi-label">Target Talent Density</div>
           <div class="kpi-value" data-count="14.3">14.3<span class="kpi-unit">%</span></div>
           <div class="kpi-context">100 Professionals</div>
         </div>
@@ -255,6 +253,9 @@ document.documentElement.setAttribute("data-auth-check", "pending");
 
     <!-- Tab 4: Strategic Insights -->
     <section class="tab-content" id="tab-strategy">
+      <h2 class="section-heading">Multiverse EVP Positioning</h2>
+      <div class="evp-cards" id="evp-cards"></div>
+
       <h2 class="section-heading">Risks & Opportunities</h2>
       <div class="strategy-grid">
         <div class="strategy-col">
@@ -265,14 +266,6 @@ document.documentElement.setAttribute("data-auth-check", "pending");
           <h3 class="strat-col-title strat-opp">Opportunities</h3>
           <div id="opp-cards"></div>
         </div>
-      </div>
-
-      <h2 class="section-heading mt-lg">Multiverse EVP Positioning</h2>
-      <div class="evp-cards" id="evp-cards"></div>
-
-      <h2 class="section-heading mt-lg">Bridge Skills — Growth Indicators</h2>
-      <div class="chart-container">
-        <div style="position:relative;height:300px;width:100%"><canvas id="bridgeChart"></canvas></div>
       </div>
     </section>
 
@@ -286,6 +279,9 @@ document.documentElement.setAttribute("data-auth-check", "pending");
 
       <h2 class="section-heading mt-lg">Methodology</h2>
       <ol class="methodology-list" id="method-list"></ol>
+
+      <h2 class="section-heading mt-lg">Works Cited</h2>
+      <ol class="methodology-list works-cited-list" id="works-cited-list"></ol>
 
       <h2 class="section-heading mt-lg">Analytics Formulas</h2>
       <div class="formula-cards">

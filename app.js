@@ -75,46 +75,92 @@ document.addEventListener("DOMContentLoaded", async function() {
       { company: "AWS", headcount: 18, growth: -16.7, vp: "Infrastructure Dominance. Backbone of the internet.", weakness: "Toil: High on-call burden, extreme frugality-driven debt", action: "Target SDE3s seeking to move from plumbing to product", opp: 8.0, threat: 5.5 },
       { company: "Monzo/Wise", headcount: 12, growth: 8.3, vp: "Modern Tech & Product Brand. Cool London fintech vibe.", weakness: "High accountability for profitability, IPO-driven burnout risk", action: "Target architects wanting EdTech mission over fintech pressure", opp: 6.0, threat: 6.5 },
       { company: "Google DeepMind", headcount: 10, growth: 66.7, vp: "Research prestige. Cutting-edge AI research + engineering.", weakness: "Lacks direct product-to-user feedback loop", action: "Emphasise Multiverse's direct learner impact vs pure research", opp: 3.5, threat: 9.0 },
-      { company: "Duffel", headcount: 6, growth: 15.0, vp: "Elixir/Phoenix stack. Rebuilding core travel infrastructure.", weakness: "Small domain niche (travel APIs), limited mission breadth", action: "Highlight Multiverse's broader social impact and AI-native stack", opp: 7.0, threat: 4.0 },
+      { company: "Duffel", headcount: 6, growth: 15.0, vp: "API-first travel stack. Rebuilding core travel infrastructure.", weakness: "Small domain niche (travel APIs), limited mission breadth", action: "Highlight Multiverse's broader social impact and AI-native stack", opp: 7.0, threat: 4.0 },
       { company: "Apple", headcount: 7, growth: 75.0, vp: "Prestige & Privacy. On-device AI and consumer hardware.", weakness: "Secretive culture prevents open-source community engagement", action: "Target engineers wanting open collaboration & mission impact", opp: 4.0, threat: 6.0 }
     ],
     risks: [
       { category: "Compensation Ceiling", severity: "High", detail: "Elite 14.3% receive competing offers from JPMorgan (\u00a3207k+) and Meta. Wise Principal banding reaches \u00a3199k base + RSUs." },
-      { category: "UK Tax Trap", severity: "High", detail: "\u00a3100k-\u00a3125k band has effective 60% marginal rate. Candidates prioritise salary sacrifice into pensions and equity over base increases." },
-      { category: "Elixir Stack Competition", severity: "Medium", detail: "Duffel, Prima, Fresha and DICE compete directly on Elixir/Phoenix stack with similar 'impact mission' narratives in travel, insurance and healthcare." },
-      { category: "Pipeline Bottleneck", severity: "High", detail: "Only 1.6 qualified professionals per posting (vs 4.2 in regional hubs). TAM of 701 collapses to 100 elite." }
+      { category: "Pipeline Bottleneck", severity: "High", detail: "Only 1.6 qualified professionals per posting (vs 4.2 in regional hubs). TAM of 701 collapses to 100 elite." },
+      { category: "Hybrid Expectation Gap", severity: "Medium", detail: "81% of London tech professionals expect flexible work and often require 20%+ salary uplift for full office mandates." },
+      { category: "Interview Friction", severity: "High", detail: "Staff candidates increasingly reject generic LeetCode loops; interview process quality directly impacts acceptance and dropout rates." }
     ],
     opportunities: [
       { category: "Big Tech Exodus", severity: "High", detail: "Meta (-9.4%), AWS (-16.7%), Personio (-20%) haemorrhaging Staff talent. These engineers have distributed systems DNA but suffer organisational exhaustion." },
-      { category: "Elixir Advantage", severity: "High", detail: "Multiverse's Elixir legacy is a strength: BEAM-based concurrency, 95% server reduction (Pinterest case). Attracts engineers from toil-heavy AWS/Meta environments." },
+      { category: "Platform Orchestration Shift", severity: "High", detail: "The market is shifting from feature builders to platform orchestrators (Solution Architecture +164.2%, IaC +98.8%), aligning tightly with Staff expectations." },
       { category: "Ownership Gap", severity: "High", detail: "Staff Engineers architect systems for 22,000+ apprentices \u2014 direct code-to-social-mobility link vs tweaking ad-ranking algorithms at Big Tech." },
       { category: "Gender Diversity Edge", severity: "Medium", detail: "Only 11% female at Staff level. Elite female engineers prioritise psychological safety and inclusive collaboration \u2014 Multiverse\u2019s core EVP pillars." }
     ],
     evpGaps: [
       { gap: "Ownership Gap", detail: "Architect learner journey for 22,000+ apprentices vs tweaking ad-ranking algorithms at Big Tech" },
-      { gap: "Elixir Dev Productivity", detail: "BEAM-based fault tolerance + Elixir concurrency. Pinterest cut servers 95%. No toil-heavy debugging like AWS/Meta." },
-      { gap: "AI Implementation Gap", detail: "AI Native (AI Grading, Atlas productionised) vs AI Explorer (52% of fintech). Agentic AI roadmap is real, not theoretical." }
-    ],
-    bridgeSkills: [
-      { skill: "Data Architecture", growth: 207.7 },
-      { skill: "Solution Architecture", growth: 164.2 },
-      { skill: "Infrastructure as Code", growth: 98.8 },
-      { skill: "Large Language Models", growth: 94.4 },
-      { skill: "Data Pipelines", growth: 85.6 }
+      { gap: "Platform Orchestration Shift", detail: "London hiring has moved to orchestration capability: Solution Architecture +164.2% and Infrastructure as Code +98.8% growth." },
+      { gap: "AI Implementation Gap", detail: "AI Native delivery (AI Grading, Atlas productionised) vs AI Explorer cohorts where implementation remains mostly experimental." },
+      { gap: "Donor Conversion Window", detail: "Meta and AWS outflow is a timed conversion opportunity for distributed-systems engineers seeking impact and less operational toil." },
+      { gap: "Hybrid Flexibility Edge", detail: "81% of tech professionals now treat flexible work as non-negotiable, making a credible hybrid model a decisive offer-stage lever." }
     ],
     sources: [
-      { source: "LinkedIn Talent Intelligence", reports: 9, desc: "Core boolean-validated talent pool data, skill penetration, growth rates, and employer flows" },
-      { source: "Multiverse Internal Data", reports: 3, desc: "Job description requirements, EVP positioning, wage bill and revenue metrics" },
-      { source: "Market Salary Reports", reports: 5, desc: "Robert Half UK Tech Salary Guide 2026, Harvey Nash, eFinancialCareers, 6figr.com" },
-      { source: "Staff+ Salary Banding Research", reports: 1, desc: "Dedicated UK Staff Engineer compensation study: 3-tier banding (Foundational, Senior, Principal) with base medians and P25/P50/P75 total comp ranges" }
+      { source: "LinkedIn Talent Intelligence", reports: 9, desc: "Core validated talent pool, skill penetration, employer flow, and density analysis inputs" },
+      { source: "Multiverse Internal Inputs", reports: 4, desc: "Role definition, EVP, experimentation/AI playbooks, and internal operating context" },
+      { source: "Market & Compensation Benchmarks", reports: 12, desc: "Salary guides, hiring outlooks, and London market trend references used in the blueprint" },
+      { source: "Community & Sentiment Signals", reports: 11, desc: "Reddit and practitioner discourse used to triangulate culture and attrition narratives" },
+      { source: "Full Works Cited Corpus", reports: 47, desc: "All cited references imported from Talent Blueprint for Staff Engineer.docx" }
     ],
     methodology: [
       "TAM of 701 validated via core boolean: Python + AWS + AI experience in London Area at Staff+ seniority",
       "Elite pool (100) filtered by: LLM/GenAI + Platform/Product Engineering + Distributed Systems",
       "Skill Density Index: cohort_skills / total_pool = 100 / 701 = 14.3%",
       "Hiring Difficulty Score (9/10): composite of supply/demand ratio (1.6:1), median TTH (31 days), pool concentration",
-      "Salary ranges derived from Staff+ Salary Banding Research doc: 3-tier structure (Foundational \u00a3107k base, Senior \u00a3135k, Principal \u00a3164k) with P25/P50/P75 total compensation",
-      "Competitor analysis based on LTI employer flow data + qualitative sentiment from Reddit, Glassdoor, Blind"
+      "Salary ranges derived from Staff+ Salary Banding Research and London market benchmarks for 2026 role calibration",
+      "Competitor analysis triangulated with LTI employer flow and practitioner sentiment from community sources",
+      "Traceability expanded with full Works Cited entries parsed from the Talent Blueprint source document"
+    ],
+    worksCited: [
+      "Density - Staff Engineer - Multi (1).xlsx",
+      "Multiverse's playbook for creating a culture of experimentation, accessed on March 5, 2026, https://www.multiverse.io/en-GB/blog/multiverse-s-playbook-for-creating-a-culture-of-experimentation",
+      "Meta vs Google Offer - Which Should I Join for Long-Term Growth? : r/leetcode - Reddit, accessed on March 5, 2026, https://www.reddit.com/r/leetcode/comments/1kdyhol/meta_vs_google_offer_which_should_i_join_for/",
+      "Hire Software Developers in London - Market trends and insights - Agency Partners, accessed on March 5, 2026, https://agency-partners.com/reports/market-insights/united-kingdom-london-software",
+      "Staff Software Engineer - Product Fundamentals @ Multiverse ..., accessed on March 5, 2026, https://jobs.generalcatalyst.com/companies/multiverse/jobs/68294215-staff-software-engineer-product-fundamentals",
+      "Facebook London wlb and Pip culture : r/cscareerquestionsEU - Reddit, accessed on March 5, 2026, https://www.reddit.com/r/cscareerquestionsEU/comments/q984je/facebook_london_wlb_and_pip_culture/",
+      "JPMorgan Engineering Pay: What you'll earn as an analyst, associate and VP, accessed on March 5, 2026, https://www.efinancialcareers.com/news/tech-pay-jpmorgan-software-engineer",
+      "AboutTheData: Hiring difficulty - Salesforce, accessed on March 5, 2026, https://talentneuron.my.site.com/Support/s/article/AboutTheData-Hiring-difficulty?nocache=https%3A%2F%2Ftalentneuron.my.site.com%2FSupport%2Fs%2Farticle%2FAboutTheData-Hiring-difficulty",
+      "Is Meta WLB that bad in UK? : r/cscareerquestionsuk - Reddit, accessed on March 5, 2026, https://www.reddit.com/r/cscareerquestionsuk/comments/1cdnxqz/is_meta_wlb_that_bad_in_uk/",
+      "Questions about working at Meta : r/womenintech - Reddit, accessed on March 5, 2026, https://www.reddit.com/r/womenintech/comments/1kghvoh/questions_about_working_at_meta/",
+      "Is the WLB and PSC culture at Meta as bad as some make it out to be? - Reddit, accessed on March 5, 2026, https://www.reddit.com/r/ExperiencedDevs/comments/t0ilqg/is_the_wlb_and_psc_culture_at_meta_as_bad_as_some/",
+      "10 Best Companies for Software Engineers in 2026 - Crossover, accessed on March 5, 2026, https://www.crossover.com/resources/10-best-companies-for-software-engineers-in-2026",
+      "OpenAI to make London its largest research hub outside US - Business Matters, accessed on March 5, 2026, https://bmmagazine.co.uk/news/openai-london-largest-research-hub-outside-us/",
+      "Inspiring Employee Value Proposition Examples - FutureCode IT Consulting, accessed on March 5, 2026, https://future-code.dev/en/blog/inspiring-employee-value-proposition-examples",
+      "Google vs Meta in 2025: Salary, Culture, Interviews, and Career ..., accessed on March 5, 2026, https://blog.stackademic.com/google-vs-meta-in-2025-salary-culture-interviews-and-career-growth-compared-5295b62b948c",
+      "Is the WLB and PSC culture at Meta as bad as some make it out to be? - Reddit, accessed on March 5, 2026, https://www.reddit.com/r/cscareerquestions/comments/t0fr6u/is_the_wlb_and_psc_culture_at_meta_as_bad_as_some/",
+      "The Best Employee Value Proposition Examples - Seenit, accessed on March 5, 2026, https://www.seenit.io/resources/blog/the-best-employee-value-proposition-examples",
+      "Do staff engineers at Meta or Google like companies have more knowledge than people with Postdocs ? : r/cscareerquestions - Reddit, accessed on March 5, 2026, https://www.reddit.com/r/cscareerquestions/comments/1r0s12p/do_staff_engineers_at_meta_or_google_like/",
+      "The AI skills gap in financial services | Multiverse, accessed on March 5, 2026, https://www.multiverse.io/en-GB/blog/finserv-ai-skills-gap",
+      "Capital Markets Tech Talent Gap: Senior Engineers in 2026 - EC1 Partners, accessed on March 5, 2026, https://ec1partners.com/blog/capital-markets-tech-talent-gap-2026/",
+      "London Salaries 2026 | $107k-$5.9M - 6figr.com, accessed on March 5, 2026, https://6figr.com/us/salary/london--l",
+      "Staff Software Engineer in London at Multiverse | Apply now ..., accessed on March 5, 2026, https://talents.studysmarter.co.uk/companies/multiverse/london/staff-software-engineer-28279769/",
+      "Staff AI Engineer (Systems), Remote Job, February 2026 - Dynamite Jobs, accessed on March 5, 2026, https://dynamitejobs.com/company/strike/remote-job/staff-ai-engineer-systems",
+      "Hiring Software Engineers at Scale in 2026: How Enterprises Are Solving Talent Shortages Without Slowing Delivery - AIQU, accessed on March 5, 2026, https://aiqusearch.com/blog/hiring-software-engineers-at-scale-in-2026-how-enterprises-are-solving-talent-shortages-without-slowing-delivery",
+      "UK Labour Market Insights - February 2026 Trends - Redline Group, accessed on March 5, 2026, https://www.redlinegroup.com/insight-details/uk-labour-market-insights-february-2026",
+      "Multiverse Losses Widen to £63.3m in 2025 Despite 36% Revenue Growth - IndexBox, accessed on March 5, 2026, https://www.indexbox.io/blog/multiverse-losses-widen-to-633m-in-2025-despite-36-revenue-growth/",
+      "Multiverse | Upskilling platform for AI and tech adoption, accessed on March 5, 2026, https://www.multiverse.io/en-GB",
+      "Recruitment forecasts for 2026 - what it means for Defence Technology, Engineering, Aviation, Business Support and contractor talent - CBSbutler, accessed on March 5, 2026, https://www.cbsbutler.com/blog/recruitment-forecasts-for-2026-what-it-means-for-defence-technology-engineering-aviation-business-support-contractor-talent-203",
+      "Defense Tech Surges 2026: 5 Sectors & Startup Opportunities - YouTube, accessed on March 5, 2026, https://www.youtube.com/shorts/qQbgimeobWY",
+      "London's Leading Tech Frontiers: Spotlight on Companies Shaping 2026 - The Codest, accessed on March 5, 2026, https://thecodest.co/en/blog/londons-leading-tech-frontiers-spotlight-on-companies-shaping-2024/",
+      "11 of the Most Exciting British Scale-ups to Watch in 2025 - The Business Journal, accessed on March 5, 2026, https://thebusinessjournal.co.uk/tech/fintech-to-greentech-the-11-uk-scale-ups-you-need-to-be-watching/",
+      "Capsule Cover | The UK's Top 50 Tech Scale-Ups | Capsule Scale-Up 50 2026, accessed on March 5, 2026, https://capsulecover.com/blog/capsule-scale-up-50-2026?hsLang=en",
+      "London drives sharp rebound in UK Fintech hiring - Morgan McKinley, accessed on March 5, 2026, https://www.morganmckinley.com/uk/article/london-drives-sharp-rebound-in-uk-fintech-hiring",
+      "Multiverse's playbook for landing AI transformation, accessed on March 5, 2026, https://www.multiverse.io/en-GB/blog/multiverse-s-playbook-for-landing-ai-transformation",
+      "The 10 Most In-demand Tech Careers of 2026 | LSE Executive Education, accessed on March 5, 2026, https://www.lse.ac.uk/study-at-lse/executive-education/insights/articles/the-10-most-in-demand-tech-careers-of-2026",
+      "Software 2026 trends | Market insights - Harvey Nash, accessed on March 5, 2026, https://www.harveynash.co.uk/latest-news/software-trends-in-the-year-ahead-a-uk-hiring-outlook",
+      "Software Engineer yearly salaries in London, England, ENG at JP Morgan - Indeed, accessed on March 5, 2026, https://uk.indeed.com/cmp/J.P.-Morgan-9/salaries/Software-Engineer/London-ENG",
+      "Best Software Companies in London UK 2026 - Top IT Firms Reviewed & Ranked - Givni, accessed on March 5, 2026, http://givni.in/blog/best-software-companies-in-london-uk-2025",
+      "UK Tech Recruitment Trends to Watch in 2026 - Ntrinsic, accessed on March 5, 2026, https://www.ntrinsicglobal.com/resources/blog/uk-tech-recruitment-trends-to-watch-in-2026/",
+      "UK Tech Hiring Outlook 2026: Business Mindsets, Hybrid Pressures & a Return to Contracting | Source Group International - Technology Recruitment & Consulting Specialists, accessed on March 5, 2026, https://www.sourcegroupinternational.com/insights/uk-tech-hiring-outlook-2026/",
+      "2026 UK Tech and IT Salary Guide and Survey - Robert Half, accessed on March 5, 2026, https://www.roberthalf.com/gb/en/insights/salary-guide/technology",
+      "10 workforce trends tech leaders can't ignore in 2026 | Lorien Insights, accessed on March 5, 2026, https://www.lorienglobal.com/insights/10-workforce-trends-tech-leaders-cant-ignore",
+      "Britain's truly got talent: 10 of the most promising early-stage startups to keep an eye on in 2026 - BeBeez, accessed on March 5, 2026, https://bebeez.eu/2026/02/18/britains-truly-got-talent-10-of-the-most-promising-early-stage-startups-to-keep-an-eye-on-in-2026/",
+      "State of the industry in 2025 - are we still at mid 2023 levels? : r/ExperiencedDevs - Reddit, accessed on March 5, 2026, https://www.reddit.com/r/ExperiencedDevs/comments/1hwtfxe/state_of_the_industry_in_2025_are_we_still_at_mid/",
+      "Solutions | Engineering | Multiverse, accessed on March 5, 2026, https://www.multiverse.io/en-GB/employers/solutions/engineering",
+      "Tech \"Talent Wars\" Are Over - 14:00:00 25 Feb 2026 - London Stock Exchange, accessed on March 5, 2026, https://www.londonstockexchange.com/news-article/market-news/tech-talent-wars-are-over/17477015",
+      "Looking Ahead: What 2026 Might Hold for Tech Hiring in the UK - Noa Recruitment, accessed on March 5, 2026, https://thisisnoa.com/looking-ahead-what-2026-might-hold-for-tech-hiring-in-the-uk"
     ]
   };
 
@@ -620,25 +666,6 @@ document.addEventListener("DOMContentLoaded", async function() {
     document.getElementById("evp-cards").innerHTML = DATA.evpGaps.map(function(g){
       return '<div class="evp-card"><div class="evp-card-title">'+g.gap+'</div><div class="evp-card-text">'+g.detail+'</div></div>';
     }).join("");
-    buildBridgeChart();
-  }
-
-  function buildBridgeChart() {
-    kill("bridge");
-    var c = C();
-    var sorted = DATA.bridgeSkills.slice().sort(function(a,b){return b.growth-a.growth;});
-    var colors = [c.accent,c.accent2,c.purple,c.amber,c.green];
-    charts.bridge = new Chart(document.getElementById("bridgeChart"), {
-      type: "bar",
-      data: { labels: sorted.map(function(s){return s.skill;}), datasets: [{ label: "YoY Growth %", data: sorted.map(function(s){return s.growth;}), backgroundColor: sorted.map(function(_,i){return colors[i%5];}), borderRadius: 4 }] },
-      options: {
-        indexAxis: "y", responsive: true, maintainAspectRatio: false,
-        plugins: { legend: { display: false },
-          datalabels: { display: true, color: c.text, font: { size: 11, weight: "700", family: "Figtree,sans-serif" }, anchor: "end", align: "right", formatter: function(v){ return "+"+v+"%"; } }
-        },
-        scales: { x: { ticks: { color: c.textFaint, callback: function(v){return "+"+v+"%";} }, grid: { color: c.border+"33" } }, y: { ticks: { color: c.textMuted, font: { size: 12, weight: "600" } }, grid: { display: false } } }
-      }
-    });
   }
 
   // ---- SOURCES TAB ----
@@ -647,6 +674,7 @@ document.addEventListener("DOMContentLoaded", async function() {
       return '<div class="source-card"><div class="source-card-count">'+s.reports+'</div><div class="source-card-name">'+s.source+'</div><div class="source-card-desc">'+s.desc+'</div></div>';
     }).join("");
     document.getElementById("method-list").innerHTML = DATA.methodology.map(function(m){ return "<li>"+m+"</li>"; }).join("");
+    document.getElementById("works-cited-list").innerHTML = DATA.worksCited.map(function(ref){ return "<li>"+ref+"</li>"; }).join("");
   }
 
   // ---- REBUILD ON THEME CHANGE ----
@@ -655,7 +683,6 @@ document.addEventListener("DOMContentLoaded", async function() {
     if (charts.arb) buildArbitrageChart();
     if (rendered.talent) { buildSankey(); buildPoolDonut(); buildSkillsChart(); }
     if (rendered.comp) buildScatter();
-    if (rendered.strat) buildBridgeChart();
   }
 
   // ---- INIT ----
